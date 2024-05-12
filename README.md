@@ -12,8 +12,8 @@
 1. `AWS Lambda` リソースを作成する
 2. 作成したリソースを使って、コンソールログを出力するコードを実装する
 3. 実装したコードをテスト実行する
-4. 1 分に 1 回 lambda 関数をトリガーする `Amazon EventBridge` ルールを作成する
-5. 定期実行によって出力されたコンソールログを `Amazon CloudWatch Logs` で確認する
+4. 出力されたコンソールログを `Amazon CloudWatch Logs` で確認する
+5. 1 分に 1 回 lambda 関数をトリガーする `Amazon EventBridge` ルールを作成する
 6. (時間があれば) lambda 関数から `Amazon DynamoDB` にデータを保存する
 
 # 手順詳細
