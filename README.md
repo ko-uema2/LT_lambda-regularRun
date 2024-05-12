@@ -1,14 +1,64 @@
-# Welcome to your CDK TypeScript project
+# 全体像
 
-This is a blank project for CDK development with TypeScript.
+# 前提条件
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+- 使用言語： JavaScript (コンソール)・TypeScript (CDK)
+- 実行環境： Node.js 20.x
+- AWS アカウント： 作成済み
+- 操作はすべて AWS コンソール上で行う
 
-## Useful commands
+# やることサマリ
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+1. `AWS Lambda` リソースを作成する
+2. 作成したリソースを使って、コンソールログを出力するコードを実装する
+3. 実装したコードをテスト実行する
+4. 1 分に 1 回 lambda 関数をトリガーする `Amazon EventBridge` ルールを作成する
+5. 定期実行によって出力されたコンソールログを `Amazon CloudWatch Logs` で確認する
+6. (時間があれば) lambda 関数から `Amazon DynamoDB` にデータを保存する
+
+# 手順詳細
+
+本項目では、上記のサマリに沿って、各手順に関連する公式ドキュメントへのリンクを記載します。
+
+_公式ドキュメントを読めばまあ大体のことが解決するんですが、ピンポイントに欲しい箇所を探し出すのが難しく感じます。。  
+そのため、一度参照したドキュメントは記録しておくのが個人的にオススメです！_
+
+## 1. `AWS Lambda` リソースを作成する
+
+[Node.js の初期化](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-nodejs.html#nodejs-initialization)
+
+[Node.js による Lambda 関数の構築](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-nodejs.html)
+
+[Lambda 命令セットアーキテクチャ (ARM/x86)](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html)
+
+[Lambda ランタイム](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtimes.html)
+
+## 2. 作成したリソースを使って、コンソールログを出力するコードを実装する
+
+[Node.js の AWS Lambda 関数ログ作成](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/nodejs-logging.html)
+
+## 3. 実装したコードをテスト実行する
+
+[コンソールでの Lambda 関数のテスト](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/testing-functions.html)
+
+[Using AWS Lambda with Amazon EventBridge (CloudWatch Events)](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents.html)
+
+[Interface ScheduledEvent\<TDetail\>](https://typestrong.org/typedoc-auto-docs/_types_aws-lambda/interfaces/ScheduledEvent.html)
+
+## 4. 出力されたコンソールログを `Amazon CloudWatch Logs` で確認する
+
+[AWS Lambda での Amazon CloudWatch ログの使用](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/monitoring-cloudwatchlogs.html#monitoring-cloudwatchlogs-advanced)
+
+## 5. 1 分に 1 回 lambda 関数をトリガーする `Amazon EventBridge` ルールを作成する
+
+[スケジュールに従って実行する Amazon EventBridge ルールの作成](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-create-rule-schedule.html)
+
+[cron 式のリファレンス](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-cron-expressions.html)
+
+[rate 式のリファレンス](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-rate-expressions.html)
+
+## 6. (時間があれば) lambda 関数から `Amazon DynamoDB` にデータを保存する
+
+[チュートリアル: Lambda と DynamoDB を使用した CRUD API の構築](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-dynamo-db.html)
+
+[ランタイムに含まれる SDK バージョン](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-nodejs.html#nodejs-sdk-included)
